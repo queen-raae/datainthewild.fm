@@ -1,51 +1,38 @@
 ---
+import "../global.css";
+
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SHOW_TITLE,
+  SHOW_DESCRIPTION,
+} from "./../consts";
+
 interface Props {
-	title: string;
+  title?: string;
 }
 
+const siteTitle = SITE_TITLE || SHOW_TITLE;
+const siteDescription = SITE_DESCRIPTION || SHOW_DESCRIPTION;
+
 const { title } = Astro.props;
+const formattedTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={siteDescription} />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{formattedTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>

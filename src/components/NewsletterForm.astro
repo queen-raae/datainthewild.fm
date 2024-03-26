@@ -1,0 +1,57 @@
+<form action={import.meta.env.PUBLIC_OUTSETA_EMAIL_LIST_URL} method="post">
+  <label for="Email">Your best email address:</label>
+  <input type="email" id="Email" name="Email" required />
+
+  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+    <input
+      type="text"
+      name="o_oQArNqbCOZ0Fzd2D9MepfyUm_h890WSFg"
+      tabindex="-1"
+      value=""
+    />
+  </div>
+
+  <input
+    class="button bold"
+    type="submit"
+    value="Notify me!"
+    data-wait="Please wait..."
+  />
+</form>
+
+<p>
+  Make sure to confirm your subscription: Look for an email sent from Queen Raae
+  and hit "Yes, subscribe me to this list"
+</p>
+
+<script is:inline src="https://cdn.outseta.com/emailsignup.min.js"></script>
+
+<style>
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+
+    + p {
+      font-size: 0.6em;
+      display: none;
+    }
+
+    &:not(:has(input)) {
+      display: block;
+    }
+  }
+
+  label {
+    width: 100%;
+    font-size: 0.6em;
+    margin-bottom: -0.3em;
+  }
+
+  input[type="email"] {
+    padding: 0.5em 0.5em;
+    width: 40ch;
+    font-size: 1em;
+    border: var(--border);
+  }
+</style>

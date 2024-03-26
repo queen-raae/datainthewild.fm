@@ -1,0 +1,59 @@
+---
+// import the Image component and the image
+import ola from "../images/ola-3.png";
+import raae from "../images/raae-2.png";
+import anna from "../images/anna-maste.png";
+import anthony from "../images/anthony-eden.png";
+import benedikt from "../images/benedikt-deicke.png";
+import dan from "../images/dan-singerman.png";
+import ivar from "../images/ivar-osthus.png";
+import mathias from "../images/mathias-hansen.png";
+import monica from "../images/monica-lent.png";
+import pierre from "../images/pierre-de-wulf.png";
+
+const reel = [
+  { src: ola, alt: "Captain Ola" },
+  { src: anna, alt: "Anna Maste" },
+  { src: anthony, alt: "Anthony Eden" },
+  { src: benedikt, alt: "Benedikt Deicke" },
+  { src: dan, alt: "Dan Singerman" },
+  { src: ivar, alt: "Ivar Osthus" },
+  { src: mathias, alt: "Mathias Hansen" },
+  { src: monica, alt: "Monica Lent" },
+  { src: pierre, alt: "Pierre De Wulf" },
+  { src: raae, alt: "Queen Raae" },
+];
+---
+
+<div class="reel">
+  {
+    reel.map((image) => (
+      <img src={image.src.src} alt={image.alt} title="Coming soon" />
+    ))
+  }
+</div>
+
+<style>
+  .reel {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  img {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: 0.3em 0.3em 0 0 var(--color-accent);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+
+    &:nth-child(3n-1) {
+      box-shadow: 0.3em 0.3em 0 0 var(--color-secondary);
+    }
+
+    &:nth-child(3n) {
+      box-shadow: 0.3em 0.3em 0 0 var(--color-primary);
+    }
+  }
+</style>
