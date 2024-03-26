@@ -30,28 +30,6 @@
 
 html {
   font-size: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
-
-  &::after,
-  &::before {
-    content: "";
-    display: block;
-    position: fixed;
-    top: 0.2em;
-    left: 0.2em;
-    bottom: 0.2em;
-    right: 0.2em;
-    border: var(--border);
-    border-width: 0.8em;
-    pointer-events: none;
-  }
-
-  &::before {
-    top: 0em;
-    left: 0em;
-    bottom: 0em;
-    right: 0em;
-    border-color: var(--paper);
-  }
 }
 
 body {
@@ -106,10 +84,6 @@ a.button,
       color: var(--text);
     }
   }
-}
-
-body {
-  padding-bottom: 15rem;
 }
 
 nav {

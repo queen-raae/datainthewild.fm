@@ -38,7 +38,55 @@ import { Content as Sponsor } from "./_sponsor.md";
 
 <style>
   main {
-    padding: min(15%, 8em) 0;
+    padding-top: min(28vw, 12em);
+    padding-bottom: min(28vw, 13em);
+    max-width: 100ch;
+    margin: 0 auto;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      max-width: 80ch;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    &::before {
+      border: var(--border);
+      border-width: 0.8em;
+      z-index: -2;
+      background-image: url("/assets/jungle-branches.png");
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: 102% auto;
+    }
+
+    &::after {
+      max-width: 85ch;
+      background-image: url("/assets/jungle-crocodil.png");
+      background-position: left bottom;
+      background-repeat: no-repeat;
+      background-size: 40% auto;
+    }
+
+    header,
+    section {
+      max-width: 75ch;
+      margin: 0 auto;
+      padding: 0 2em;
+    }
+
+    section {
+      padding-top: 3em;
+    }
   }
 
   h1 {
@@ -47,7 +95,7 @@ import { Content as Sponsor } from "./_sponsor.md";
     font-weight: 900;
 
     + p {
-      margin-top: min(5%, 2em);
+      margin-top: min(1.5vw, 1em);
       font-size: 1.3em;
       line-height: 1.2;
       font-weight: 600;
@@ -57,13 +105,6 @@ import { Content as Sponsor } from "./_sponsor.md";
 
   main :global(#coming-soon + p) {
     text-wrap: balance;
-  }
-
-  header,
-  section {
-    max-width: 80ch;
-    margin: 0 auto;
-    padding: min(5%, 2em) 2em;
   }
 
   section :global(> p) {
