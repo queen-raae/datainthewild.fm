@@ -5,8 +5,6 @@
     "Sitka Small", serif;
   --industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium",
     "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
-  --neo-Grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-    Arial, sans-serif;
 
   --paper: #fffaf0;
   --paper-inverted: #000;
@@ -104,4 +102,16 @@ nav {
   + * {
     margin-top: 4em;
   }
+}
+
+.font-neo {
+  font-family: var(--neo-Grotesque);
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+.text-primary {
+  color: var(--color-primary);
 }
