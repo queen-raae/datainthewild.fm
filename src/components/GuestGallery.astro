@@ -1,15 +1,16 @@
 ---
-// import the Image component and the image
+import { Image } from "astro:assets";
+
 import ola from "../images/ola-3.png";
 import raae from "../images/raae-2.png";
 import anna from "../images/anna-maste.png";
-import anthony from "../images/anthony-eden.png";
-import benedikt from "../images/benedikt-deicke.png";
-import dan from "../images/dan-singerman.png";
 import ivar from "../images/ivar-osthus.png";
-import mathias from "../images/mathias-hansen.png";
+import dan from "../images/dan-singerman.png";
 import monica from "../images/monica-lent.png";
+import anthony from "../images/anthony-eden.png";
 import pierre from "../images/pierre-de-wulf.png";
+import mathias from "../images/mathias-hansen.png";
+import benedikt from "../images/benedikt-deicke.png";
 
 const reel = [
   { src: ola, alt: "Captain Ola" },
@@ -28,7 +29,7 @@ const reel = [
 <div class="reel">
   {
     reel.map((image) => (
-      <img src={image.src.src} alt={image.alt} title="Coming soon" />
+      <Image alt={image.alt} src={image.src} title="Coming soon" />
     ))
   }
 </div>
@@ -42,16 +43,19 @@ const reel = [
   }
 
   img {
-    border: var(--border);
-    border-radius: var(--border-radius);
-    box-shadow: 0.3em 0.3em 0 0 var(--color-accent);
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
     object-fit: cover;
 
+    background-color: var(--paper);
+
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    box-shadow: 0.3em 0.3em 0 0 var(--color-accent);
     &:nth-child(3n-1) {
       box-shadow: 0.3em 0.3em 0 0 var(--color-secondary);
     }
-
     &:nth-child(3n) {
       box-shadow: 0.3em 0.3em 0 0 var(--color-primary);
     }

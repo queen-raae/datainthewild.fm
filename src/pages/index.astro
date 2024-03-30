@@ -8,6 +8,18 @@ import { SHOW_TITLE, SHOW_DESCRIPTION } from "../consts";
 import { Content as Soon } from "./_soon.md";
 import { Content as Hosts } from "./_hosts.md";
 import { Content as Sponsor } from "./_sponsor.md";
+
+import { getImage } from "astro:assets";
+import jungleBranches from "../images/jungle-branches.png";
+import jungleCrocodil from "../images/jungle-crocodil.png";
+
+const optimizedImages = await Promise.all([
+  getImage({ src: jungleBranches }),
+  getImage({ src: jungleCrocodil })
+])
+
+const jungleBranchesOptimized = `url(${optimizedImages[0].src})`
+const jungleCrocodilOptimized = `url(${optimizedImages[1].src})`
 ---
 
 <Layout>
@@ -36,7 +48,7 @@ import { Content as Sponsor } from "./_sponsor.md";
   </main>
 </Layout>
 
-<style>
+<style define:vars={{ jungleBranchesOptimized, jungleCrocodilOptimized }}>
   main {
     padding-top: min(28vw, 12em);
     padding-bottom: min(28vw, 13em);
@@ -65,7 +77,7 @@ import { Content as Sponsor } from "./_sponsor.md";
       border: var(--border);
       border-width: 0.8em;
       z-index: -2;
-      background-image: url("/assets/jungle-branches.png");
+      background-image: var(--jungleBranchesOptimized);
       background-position: center top;
       background-repeat: no-repeat;
       background-size: 102% auto;
@@ -73,7 +85,7 @@ import { Content as Sponsor } from "./_sponsor.md";
 
     &::after {
       max-width: 85ch;
-      background-image: url("/assets/jungle-crocodil.png");
+      background-image: var(--jungleCrocodilOptimized);
       background-position: left bottom;
       background-repeat: no-repeat;
       background-size: 40% auto;
