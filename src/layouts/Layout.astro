@@ -17,22 +17,48 @@ const siteTitle = SITE_TITLE || SHOW_TITLE;
 const siteDescription = SITE_DESCRIPTION || SHOW_DESCRIPTION;
 
 const { title } = Astro.props;
-const formattedTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialType = "website";
+const socialTitle = pageTitle;
+const socialImage = new URL("/assets/og-image.png", Astro.url);
+const socialDescription = siteDescription;
+const twitterCreator = "@raae";
+const twitterCard = "summary_large_image";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={siteDescription} />
-    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>"
     />
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+
+    <meta name="description" content={siteDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:type" content={socialType} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
+    <meta property="og:image" content={socialImage} />
+
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:creator" content={twitterCreator} />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={socialDescription} />
+    <meta name="twitter:image:src" content={socialImage} />
+
     <Font />
-    <title>{formattedTitle}</title>
+
     <script async src="https://cdn.outseta.com/emailsignup.min.js"></script>
   </head>
   <body>

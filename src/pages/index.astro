@@ -15,11 +15,11 @@ import jungleCrocodil from "../images/jungle-crocodil.png";
 
 const optimizedImages = await Promise.all([
   getImage({ src: jungleBranches }),
-  getImage({ src: jungleCrocodil })
-])
+  getImage({ src: jungleCrocodil }),
+]);
 
-const jungleBranchesOptimized = `url(${optimizedImages[0].src})`
-const jungleCrocodilOptimized = `url(${optimizedImages[1].src})`
+const jungleBranchesOptimized = `url(${optimizedImages[0].src})`;
+const jungleCrocodilOptimized = `url(${optimizedImages[1].src})`;
 ---
 
 <Layout>
@@ -107,14 +107,6 @@ const jungleCrocodilOptimized = `url(${optimizedImages[1].src})`
     font-size: 3.2em;
     line-height: 1;
     font-weight: 900;
-
-    em {
-      font-family: var(--neo-Grotesque);
-    }
-
-    span {
-      font-family: var(--font-apricot);
-    }
 
     + p {
       margin-top: min(1.5vw, 1em);

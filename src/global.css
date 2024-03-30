@@ -44,15 +44,15 @@ a {
 }
 
 em {
-  font-style: normal;
-  color: var(--color-primary);
+  font-style: inherit;
+  font-weight: inherit;
+  font-family: var(--font-apricot);
 }
 
 strong {
-  font-style: normal;
-  color: var(--text-inverted);
-  background-color: var(--paper-inverted);
-  padding: 0.2em 0.4em;
+  font-style: inherit;
+  font-weight: inherit;
+  color: var(--color-primary);
 }
 
 button,
