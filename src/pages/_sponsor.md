@@ -2,7 +2,7 @@
 
 **Brought to you by [Xata](https://xata.io/?utm_source=datainthewildfm&utm_medium=queen&utm_campaign=data-in-the-wild&utm_content=home)**
 
-[Xata](https://xata.io/?utm_source=datainthewildfm&utm_medium=queen&utm_campaign=data-in-the-wild&utm_content=home) simplifies how developers work with data in modern web applications. Discover how easy data can be - through code snippets and a strongly typed SDK, to branching with zero downtime migrations, a powerful search engine, and more. Think data, not databases.
+[Xata](https://xata.io/?utm_source=datainthewildfm&utm_medium=queen&utm_campaign=data-in-the-wild&utm_content=home) is the only serverless data platform for PostgreSQL. Develop applications faster knowing your data layer is ready to evolve and scale with your needs.
 
 ## Season 2
 
