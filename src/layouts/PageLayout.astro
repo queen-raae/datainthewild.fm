@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { getImage } from "astro:assets";
+import jungleBranches from "../images/jungle-branches.png";
+import jungleCrocodil from "../images/jungle-crocodil.png";
+
+const optimizedImages = await Promise.all([
+  getImage({ src: jungleBranches }),
+  getImage({ src: jungleCrocodil }),
+]);
+
+const jungleBranchesOptimized = `url(${optimizedImages[0].src})`;
+const jungleCrocodilOptimized = `url(${optimizedImages[1].src})`;
+
+interface Props {
+  title?: string;
+}
+---
+
+<Layout title={Astro.params.title}>
+  <main>
+    <slot />
+  </main>
+</Layout>
+
+<style define:vars={{ jungleBranchesOptimized, jungleCrocodilOptimized }}>
+  main {
+    padding-top: min(28vw, 12em);
+    padding-bottom: min(28vw, 13em);
+    max-width: 100ch;
+    margin: 0 auto;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      max-width: 80ch;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+
+      pointer-events: none;
+    }
+
+    &::before {
+      border: var(--border);
+      border-width: 0.8em;
+      z-index: -2;
+      background-image: var(--jungleBranchesOptimized);
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: 102% auto;
+    }
+
+    &::after {
+      max-width: 85ch;
+      background-image: var(--jungleCrocodilOptimized);
+      background-position: left bottom;
+      background-repeat: no-repeat;
+      background-size: 40% auto;
+    }
+  }
+</style>
