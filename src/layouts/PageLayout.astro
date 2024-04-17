@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Player from "../components/Player.astro";
 
 import { getImage } from "astro:assets";
 import jungleBranches from "../images/jungle-branches.png";
@@ -19,12 +20,24 @@ interface Props {
 ---
 
 <Layout title={Astro.params.title}>
+  <aside>
+    <Player />
+  </aside>
   <main>
     <slot />
   </main>
 </Layout>
 
 <style define:vars={{ jungleBranchesOptimized, jungleCrocodilOptimized }}>
+  aside {
+    position: sticky;
+    top: 0;
+    max-width: 80ch;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 10;
+  }
+
   main {
     padding-top: min(28vw, 12em);
     padding-bottom: min(28vw, 13em);

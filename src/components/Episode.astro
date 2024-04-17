@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDuration, intervalToDuration } from "date-fns";
+
+type Props = CollectionEntry<"episodes">["data"];
+
+const { slug, title, formatted_summary, number, duration, media_url } =
+  Astro.props;
+
+const intervalDuration = intervalToDuration({
+  start: 0,
+  end: duration * 1000,
+});
+
+const formattedDuration = formatDuration({
+  hours: intervalDuration.hours,
+  minutes: intervalDuration.minutes,
+});
+
+const formattedSummary = formatted_summary.slice(0, 250);
+---
+
+<article>
+  <header>
+    <h2>
+      <a href={`/episodes/${slug}`}>{title}</a>
+    </h2>
+  </header>
+
+  <p set:html={formattedSummary} />
+
+  <menu>
+    <button class="bold" data-media-url={media_url} data-title={title}
+      >Play episode</button
+    >
+  </menu>
+
+  <footer>
+    <span>Episode {number}</span><span>{formattedDuration}</span>
+  </footer>
+</article>
+
+<style>
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    box-shadow: 0.3em 0.3em 0 0 var(--color-accent);
+
+    p {
+      font-size: 0.8em;
+      max-width: 60ch;
+    }
+
+    h2 {
+      margin-top: 1.6rem;
+    }
+
+    > footer {
+      display: flex;
+      justify-content: space-between;
+      order: -1;
+      width: 100%;
+
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
+  }
+</style>

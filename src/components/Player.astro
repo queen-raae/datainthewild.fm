@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+
+const episodes = await getCollection("episodes");
+const latestEpisode = episodes[0];
+---
+
+<figure id="player">
+  <figcaption>
+    <em>Latest Episode:</em>
+    {latestEpisode.data.title}
+  </figcaption>
+  <audio src={latestEpisode?.data.media_url} controls transition:persist
+  ></audio>
+</figure>
+
+<script is:inline define:vars={{ latestEpisode }}>
+  const player = document.getElementById("player");
+  const audio = player.querySelector("audio");
+  const figcaption = player.querySelector("figcaption");
+
+  const updateAllButtons = () => {
+    const buttons = document.querySelectorAll("[data-media-url]");
+    buttons.forEach((button) => {
+      const buttonMediaUrl = button.getAttribute("data-media-url");
+
+      if (buttonMediaUrl !== audio.src) {
+        button.textContent = "Play episode";
+      } else if (audio.paused) {
+        button.textContent = "Play episode";
+      } else {
+        button.textContent = "Pause episode";
+      }
+    });
+  };
+
+  const initAllButtons = () => {
+    const buttons = document.querySelectorAll("[data-media-url]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const buttonMediaUrl = button.getAttribute("data-media-url");
+        let buttonTitle = button.getAttribute("data-title");
+
+        if (buttonMediaUrl === latestEpisode.data.media_url) {
+          buttonTitle = `<em>Latest Episode:</em> ${latestEpisode.data.title}`;
+        }
+
+        figcaption.innerHTML = buttonTitle;
+
+        if (buttonMediaUrl !== audio.src) {
+          audio.src = buttonMediaUrl;
+          audio.play();
+        } else if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+    });
+  };
+
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      audio.addEventListener("play", updateAllButtons);
+      audio.addEventListener("pause", updateAllButtons);
+      audio.addEventListener("ended", updateAllButtons);
+    },
+    { once: true }
+  );
+
+  document.addEventListener("astro:page-load", () => {
+    initAllButtons();
+    updateAllButtons();
+  });
+</script>
+
+<style>
+  figure {
+    padding: 0.8em;
+    margin-bottom: -0.8em;
+    background-color: var(--paper-inverted);
+    overflow: hidden;
+    color: var(--text-inverted);
+  }
+
+  figcaption {
+    font-size: 0.8em;
+    margin-bottom: 0.3em;
+    text-align: center;
+  }
+  audio {
+    display: block;
+    width: 100%;
+  }
+</style>

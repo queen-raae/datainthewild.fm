@@ -1,14 +1,18 @@
 ---
+import { getCollection } from "astro:content";
+
+import PageLayout from "../layouts/PageLayout.astro";
+import EpisodeItem from "../components/Episode.astro";
 import GuestGallery from "../components/GuestGallery.astro";
 import Form from "../components/NewsletterForm.astro";
 
 import { SHOW_TITLE, SHOW_DESCRIPTION } from "../consts";
 
-import { Content as Soon } from "./_soon.md";
+import { Content as Signup } from "./_signup.md";
 import { Content as Hosts } from "./_hosts.md";
 import { Content as Sponsor } from "./_sponsor.md";
 
-import PageLayout from "../layouts/PageLayout.astro";
+const episodes = await getCollection("episodes");
 ---
 
 <PageLayout>
@@ -18,7 +22,11 @@ import PageLayout from "../layouts/PageLayout.astro";
   </header>
 
   <section>
-    <Soon />
+    {episodes.map((episode) => <EpisodeItem {...episode.data} />)}
+  </section>
+
+  <section>
+    <Signup />
     <Form />
   </section>
 

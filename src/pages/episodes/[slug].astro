@@ -24,56 +24,65 @@ const { entry } = Astro.props;
     <h1>{entry.data.title}</h1>
   </header>
 
+  <section>
+    <menu>
+      <button class="bold" data-media-url={entry.data.media_url}
+        >Play episode</button
+      >
+      <a class="button" href="/">Back to all episodes</a>
+    </menu>
+  </section>
+
   <section set:html={entry.data.formatted_description} />
-</PageLayout>
 
-<style>
-  header,
-  section {
-    max-width: 75ch;
-    margin: 0 auto;
-    padding: 0 2em;
-  }
+  <style>
+    header,
+    section {
+      max-width: 75ch;
+      margin: 0 auto;
+      padding: 0 2em;
+    }
 
-  section {
-    padding-top: 3em;
-  }
+    section {
+      padding-top: 3em;
+    }
 
-  h1 {
-    font-size: 3.2em;
-    line-height: 1;
-    font-weight: 900;
+    h1 {
+      font-size: 3.2em;
+      line-height: 1;
+      font-weight: 900;
 
-    + p {
-      margin-top: min(1.5vw, 1em);
-      font-size: 1.3em;
-      line-height: 1.2;
-      font-weight: 600;
+      + p {
+        margin-top: min(1.5vw, 1em);
+        font-size: 1.3em;
+        line-height: 1.2;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+    }
+
+    :global(#coming-soon + p) {
       text-wrap: balance;
     }
-  }
 
-  :global(#coming-soon + p) {
-    text-wrap: balance;
-  }
+    section :global(> p) {
+      max-width: 60ch;
+      margin: 0.6em 0;
+    }
 
-  section :global(> p) {
-    max-width: 60ch;
-    margin: 0.6em 0;
-  }
+    section :global(:is(h1, h2, h3, h4)) {
+      font-size: 2em;
+      font-weight: 900;
+    }
 
-  section :global(:is(h1, h2, h3, h4)) {
-    font-size: 2em;
-    font-weight: 900;
-  }
+    section :global(> * + :is(h1, h2, h3, h4)) {
+      font-weight: 900;
+      margin-top: min(5%, 3em);
+    }
 
-  section :global(> * + :is(h1, h2, h3, h4)) {
-    font-weight: 900;
-    margin-top: min(5%, 3em);
-  }
-
-  aside {
-    max-width: 100ch;
-    margin: min(5%, 3em) auto;
-  }
-</style>
+    aside {
+      max-width: 100ch;
+      margin: min(5%, 3em) auto;
+    }
+  </style>
+</PageLayout>
