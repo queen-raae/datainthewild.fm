@@ -5,6 +5,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 import EpisodeItem from "../components/Episode.astro";
 import GuestGallery from "../components/GuestGallery.astro";
 import Form from "../components/NewsletterForm.astro";
+import Subscribe from "../components/Subscribe.astro";
 
 import { SHOW_TITLE, SHOW_DESCRIPTION } from "../consts";
 
@@ -20,6 +21,10 @@ const episodes = await getCollection("episodes");
     <h1 set:html={SHOW_TITLE} />
     <p set:html={SHOW_DESCRIPTION} />
   </header>
+
+  <section>
+    <Subscribe />
+  </section>
 
   <section>
     {episodes.map((episode) => <EpisodeItem {...episode.data} />)}

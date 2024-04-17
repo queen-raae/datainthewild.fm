@@ -1,0 +1,63 @@
+---
+import show from "../content/show/details.json";
+
+const players = [
+  { title: "Spotify", url: show.spotify },
+  { title: "Apple Podcasts", url: show.apple_podcasts },
+  { title: "Amazon Music", url: show.amazon_music },
+  { title: "Deezer", url: show.deezer },
+  { title: "Podcast Addict", url: show.podcast_addict },
+  { title: "Player FM", url: show.player_FM },
+  { title: "Pandora", url: show.pandora },
+  { title: "Pocket Casts", url: show.pocket_casts },
+  { title: "Overcast", url: show.overcast },
+  { title: "Castro", url: show.castro },
+  { title: "Castbox", url: show.castbox },
+];
+---
+
+<menu>
+  {
+    players.map(
+      (player) =>
+        player.url && (
+          <a class="button" href={player.url} target="_blank">
+            {player.title}
+          </a>
+        )
+    )
+  }
+
+  <button data-copy={show.feed_url} class="button">Copy RSS URL</button>
+</menu>
+
+<script>
+  // Find all buttons with the `alert` class on the page.
+  const buttons = document.querySelectorAll("[data-copy]");
+
+  // Handle clicks on each button.
+  buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const textToCopy = button.getAttribute("data-copy");
+      if (!textToCopy) return;
+
+      navigator.clipboard.writeText(textToCopy);
+      button.innerHTML = "Copied!";
+    });
+  });
+</script>
+
+<style>
+  menu {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    > * {
+      font-size: 0.6em;
+    }
+  }
+</style>

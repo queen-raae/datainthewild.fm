@@ -43,7 +43,22 @@ export async function fetchEpisodes(
   return episodeData;
 }
 
+export async function fetchShow(
+  apiKey = TRANSISTOR_API_KEY,
+  showId = TRANSISTOR_SHOW_ID
+) {
+  const response = await fetch(`https://api.transistor.fm/v1/shows/${showId}`, {
+    method: "GET",
+    headers: {
+      "x-api-key": apiKey,
+    },
+  }).then((response) => response.json());
+
+  return response.data;
+}
+
 const episodeData = await fetchEpisodes();
+const showData = await fetchShow();
 
 const episodeFilePromises = episodeData.map((episode) => {
   return writeFile(
@@ -57,5 +72,14 @@ const episodeFilePromises = episodeData.map((episode) => {
     }
   );
 });
+
+await writeFile(
+  join(process.cwd() + `/src/content/show/details.json`),
+  JSON.stringify(showData.attributes, null, 2),
+  (err) => {
+    if (err) throw err;
+    console.log("The file has been saved!");
+  }
+);
 
 await Promise.all(episodeFilePromises);
