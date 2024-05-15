@@ -1,17 +1,17 @@
 ---
-import { getCollection } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 
-const episodes = await getCollection("episodes");
-const latestEpisode = episodes[episodes.length - 1];
+type Props = { latestEpisode: CollectionEntry<"episodes">["data"] };
+
+const { latestEpisode } = Astro.props;
 ---
 
 <figure id="player">
   <figcaption>
     <em>Latest Episode:</em>
-    {latestEpisode.data.title}
+    {latestEpisode.title}
   </figcaption>
-  <audio src={latestEpisode?.data.media_url} controls transition:persist
-  ></audio>
+  <audio src={latestEpisode.media_url} controls transition:persist></audio>
 </figure>
 
 <script is:inline define:vars={{ latestEpisode }}>

@@ -8,6 +8,7 @@ const episodeCollection = defineCollection({
     media_url: z.string(),
     number: z.number(),
     duration: z.number(),
+    published_at: z.string(),
     formatted_summary: z.string(),
     formatted_description: z.string(),
   }),

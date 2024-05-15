@@ -6,6 +6,10 @@ import { getImage } from "astro:assets";
 import jungleBranches from "../images/jungle-branches.png";
 import jungleCrocodil from "../images/jungle-crocodil.png";
 
+import { getEpisodesDesc } from "../content/episodes";
+
+const episodes = await getEpisodesDesc();
+
 const optimizedImages = await Promise.all([
   getImage({ src: jungleBranches }),
   getImage({ src: jungleCrocodil }),
@@ -21,7 +25,7 @@ interface Props {
 
 <Layout title={Astro.params.title}>
   <aside>
-    <Player />
+    <Player latestEpisode={episodes[0].data} />
   </aside>
   <main>
     <slot />
