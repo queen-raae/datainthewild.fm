@@ -1,6 +1,9 @@
 # episodes
 src/content/episodes/*.json
 
+# show details
+src/content/show/*.json
+
 # build output
 dist/
 
